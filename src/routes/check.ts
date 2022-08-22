@@ -12,25 +12,30 @@ router.post(
 
     let isWinning = await Piece.isWinningRow(pos, type);
     if (isWinning) {
-      return res.send(isWinning);
+      return res.send({ status: "win" });
     }
 
     isWinning = await Piece.isWinningCol(pos, type);
     if (isWinning) {
-      return res.send(isWinning);
+      return res.send({ status: "win" });
     }
 
     isWinning = await Piece.isWinningDiagLeft(pos, type);
     if (isWinning) {
-      return res.send(isWinning);
+      return res.send({ status: "win" });
     }
 
     isWinning = await Piece.isWinningDiagRight(pos, type);
     if (isWinning) {
-      return res.send(isWinning);
+      return res.send({ status: "win" });
     }
 
-    res.send(false);
+    const count = await Piece.find({});
+    if (count.length === 9) {
+      return res.send({ status: "draw" });
+    }
+
+    res.send({ status: false });
   }
 );
 
