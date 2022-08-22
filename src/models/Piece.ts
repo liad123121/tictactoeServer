@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
-interface PieceAttr {
+export interface PieceAttr {
   type: string;
-  pos: [[number, number]];
+  pos: [number, number];
 }
 
 interface PieceDoc extends mongoose.Document {
@@ -19,7 +19,7 @@ const pieceSchema = new mongoose.Schema({
     required: true,
   },
   pos: {
-    type: [[Number, Number]],
+    type: [Number, Number],
     required: true,
   },
 });
