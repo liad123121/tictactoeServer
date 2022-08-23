@@ -7,7 +7,7 @@ const addMiddleware = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { type, pos } = req.body as PieceAttr;
+  const { type, pos, room } = req.body as PieceAttr;
   const isExists = await Piece.findOne({ pos });
 
   if (isExists) {
@@ -17,6 +17,7 @@ const addMiddleware = async (
   const piece = Piece.build({
     type,
     pos,
+    room,
   });
 
   await piece.save();

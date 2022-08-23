@@ -3,8 +3,8 @@ import { Piece } from "../models/Piece";
 
 const router = express.Router();
 
-router.post("/api/delete", async (req: Request, res: Response) => {
-  await Piece.deleteMany({});
+router.delete("/api/delete/:room", async (req: Request, res: Response) => {
+  await Piece.deleteMany({ room: req.params.room });
   res.send({ status: "Deleted pieces" });
 });
 

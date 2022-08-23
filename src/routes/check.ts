@@ -8,29 +8,29 @@ router.post(
   "/api/check",
   addMiddleware,
   async (req: Request, res: Response) => {
-    const { type, pos } = req.body as PieceAttr;
+    const { type, pos, room } = req.body as PieceAttr;
 
-    let isWinning = await Piece.isWinningRow(pos, type);
+    let isWinning = await Piece.isWinningRow(pos, type, room);
     if (isWinning) {
       return res.send({ status: "win" });
     }
 
-    isWinning = await Piece.isWinningCol(pos, type);
+    isWinning = await Piece.isWinningCol(pos, type, room);
     if (isWinning) {
       return res.send({ status: "win" });
     }
 
-    isWinning = await Piece.isWinningDiagLeft(pos, type);
+    isWinning = await Piece.isWinningDiagLeft(pos, type, room);
     if (isWinning) {
       return res.send({ status: "win" });
     }
 
-    isWinning = await Piece.isWinningDiagRight(pos, type);
+    isWinning = await Piece.isWinningDiagRight(pos, type, room);
     if (isWinning) {
       return res.send({ status: "win" });
     }
 
-    const count = await Piece.find({});
+    const count = await Piece.find({ room });
     if (count.length === 9) {
       return res.send({ status: "draw" });
     }
